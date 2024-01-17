@@ -2,6 +2,7 @@ package fr.thegreensuits.viewing_party;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.thegreensuits.viewing_party.command.CommandSpawn;
 import fr.thegreensuits.viewing_party.listener.AsyncPlayerChatListener;
 import fr.thegreensuits.viewing_party.listener.EntityDamageListener;
 import fr.thegreensuits.viewing_party.listener.PlayerInteractAtEntityListener;
@@ -19,11 +20,15 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
 
+        // - Register listeners
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), INSTANCE);
         getServer().getPluginManager().registerEvents(new PlayerQuitListener(), INSTANCE);
         getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(), INSTANCE);
         getServer().getPluginManager().registerEvents(new EntityDamageListener(), INSTANCE);
         getServer().getPluginManager().registerEvents(new PlayerInteractAtEntityListener(), INSTANCE);
+
+        // - Register commands
+        getCommand("spawn").setExecutor(new CommandSpawn());
 
         getLogger().info("ViewingParty plugin enabled");
     }
