@@ -11,3 +11,6 @@ commands:
     description: Se téléporter au point d'apparition
     usage: /<command>
     aliases: [hub, lobby]
+  devmode:
+    description: Activer le mode développeur
+    usage: /<command>

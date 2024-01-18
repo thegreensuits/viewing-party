@@ -15,12 +15,16 @@ import fr.thegreensuits.viewing_party.data.player.DataPlayer;
 import lombok.Getter;
 
 public class PlayerManager implements IManager, Listener {
-    private JavaPlugin pluginInstance = Main.INSTANCE;
+    private JavaPlugin pluginInstance;
     @Getter
     private List<DataPlayer> players = new ArrayList<>();
     
     public PlayerManager() {
         super();
+
+        this.pluginInstance = Main.INSTANCE;
+
+        this.pluginInstance.getServer().getPluginManager().registerEvents(this, this.pluginInstance);
     }
 
     @Override

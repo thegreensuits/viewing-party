@@ -4,13 +4,11 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import fr.thegreensuits.viewing_party.Main;
-import lombok.Getter;
 
 public interface DataPlayer {
     public Player getBukkitPlayer();
 
     static class DataPlayerImpl implements DataPlayer {
-        @Getter
         private Player bukkitPlayer;
 
         public DataPlayerImpl(Player bukkitPlayer) {
@@ -28,27 +26,28 @@ public interface DataPlayer {
             bukkitPlayer.setPlayerListName(String.format("%s%s", color, bukkitPlayer.getName()));
 
             // - Stats
-            bukkitPlayer.setGameMode(GameMode.ADVENTURE);
-            bukkitPlayer.teleport(bukkitPlayer.getWorld().getSpawnLocation());
-            bukkitPlayer.setBedSpawnLocation(bukkitPlayer.getWorld().getSpawnLocation(), true);
-            bukkitPlayer.setHealth(20);
-            bukkitPlayer.setFoodLevel(20);
-            bukkitPlayer.setSaturation(20);
-            bukkitPlayer.setExhaustion(0);
-            bukkitPlayer.setFireTicks(0);
-            bukkitPlayer.setFallDistance(0);
-            bukkitPlayer.setExp(0);
-            bukkitPlayer.setLevel(0);
-            bukkitPlayer.setTotalExperience(0);
-            bukkitPlayer.setWalkSpeed(0.2f);
-            bukkitPlayer.setFlySpeed(0.1f);
-            bukkitPlayer.setAllowFlight(false);
-            bukkitPlayer.setFlying(false);
-            bukkitPlayer.setCanPickupItems(false);
-            bukkitPlayer.setCollidable(false);
-            bukkitPlayer.setInvulnerable(true);
-            bukkitPlayer.setGlowing(false);
-            bukkitPlayer.setGliding(false);
+            if(!isOp) {
+                bukkitPlayer.setGameMode(GameMode.ADVENTURE);
+                bukkitPlayer.teleport(bukkitPlayer.getWorld().getSpawnLocation());
+                bukkitPlayer.setBedSpawnLocation(bukkitPlayer.getWorld().getSpawnLocation(), true);
+                bukkitPlayer.setHealth(20);
+                bukkitPlayer.setFoodLevel(20);
+                bukkitPlayer.setSaturation(20);
+                bukkitPlayer.setExhaustion(0);
+                bukkitPlayer.setFireTicks(0);
+                bukkitPlayer.setFallDistance(0);
+                bukkitPlayer.setExp(0);
+                bukkitPlayer.setLevel(0);
+                bukkitPlayer.setTotalExperience(0);
+                bukkitPlayer.setWalkSpeed(0.2f);
+                bukkitPlayer.setFlySpeed(0.1f);
+                bukkitPlayer.setAllowFlight(false);
+                bukkitPlayer.setFlying(false);
+                bukkitPlayer.setCollidable(false);
+                bukkitPlayer.setInvulnerable(true);
+                bukkitPlayer.setGlowing(false);
+                bukkitPlayer.setGliding(false);
+            }
 
             // - Permissions
             this.givePermissionToPlayer("voicechat.listen", bukkitPlayer);
@@ -67,5 +66,10 @@ public interface DataPlayer {
         public void removePermissionFromPlayer(String permission, Player player) {
             player.addAttachment(Main.INSTANCE, permission, false);
         }
+
+		@Override
+		public Player getBukkitPlayer() {
+			return this.bukkitPlayer;
+		}
     }
 }

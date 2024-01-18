@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandSpawn implements CommandExecutor {
-
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) return false;
@@ -14,7 +13,7 @@ public class CommandSpawn implements CommandExecutor {
         Player player = (Player) sender;
 
         player.teleport(player.getWorld().getSpawnLocation());
-        player.sendMessage("§5Vous avez été téléporté au point d'apparition.");
+        player.sendMessage("§6Vous avez été téléporté au point d'apparition.");
 
         return true;
 	}
