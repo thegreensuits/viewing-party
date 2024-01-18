@@ -8,11 +8,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.thegreensuits.viewing_party.Main;
 import fr.thegreensuits.viewing_party.data.player.DataPlayer;
 import lombok.Getter;
 
 public class PlayerManager implements IManager, Listener {
+    private JavaPlugin pluginInstance = Main.INSTANCE;
     @Getter
     private List<DataPlayer> players = new ArrayList<>();
     
@@ -73,6 +76,18 @@ public class PlayerManager implements IManager, Listener {
             }
         }
         return false;
+    }
+
+    public void givePermissionToPlayer(String permission, Player player) {
+        player.addAttachment(pluginInstance, permission, true);
+    }
+
+    public void hasPermission(String permission, Player player) {
+        player.hasPermission(permission);
+    }
+
+    public void removePermissionFromPlayer(String permission, Player player) {
+        player.addAttachment(pluginInstance, permission, false);
     }
 
     public void clear() {

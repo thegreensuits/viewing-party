@@ -15,7 +15,9 @@ buildscript {
 
 plugins {
   //id 'com.github.spotless-java' version '6.22.0'
-  id 'java'
+  id('java')
+  id('idea')
+  id('io.ebean') version '13.25.0'
 }
 
 group 'fr.thegreensuits'
@@ -52,7 +54,11 @@ repositories {
 dependencies {
   // - Minecraft
   shadow group: 'org.spigotmc', name: 'spigot-api', version: '1.18.2-R0.1-SNAPSHOT'
-  //shadow group: 'org.spigotmc', name: 'spigot', version: '1.18.2-R0.1-SNAPSHOT'
+
+  // - Database
+  implementation group: 'io.ebean', name: 'ebean', version: '13.25.0'
+  annotationProcessor group: 'io.ebean', name: 'ebean', version: '13.25.0'
+  testImplementation group: 'io.ebean', name: 'ebean-test', version: '13.25.0'
 
   // - Utilities
   implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
